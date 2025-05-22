@@ -4,7 +4,8 @@ import { useState } from "react";
 export default function GetAmount() {
   const [formData, setFormData] = useState({
     class: '',
-    amount: ''
+    amount: '',
+    user: ''
   });
   const [buttonDisable, setButtonDisable] = useState(false)
 
@@ -41,7 +42,8 @@ export default function GetAmount() {
 
       setFormData({
         class: "",
-        amount: ""
+        amount: "",
+        user: ""
       });
       setButtonDisable(false)
     }catch(error) {
@@ -81,6 +83,17 @@ export default function GetAmount() {
             required
             value={formData.amount}
             onChange={(e) => setFormData({...formData, amount: e.target.value})}
+            className="p-2 border border-green-300 rounded focus:outline-none focus:ring-2 focus:ring-green-400 text-black"
+          />
+        </div>
+
+        <div className="flex flex-col">
+        <label className="mb-1 text-sm text-green-700 font-medium">操作者</label>
+          <input
+            type="text"
+            required
+            value={formData.user}
+            onChange={(e) => setFormData({...formData, user: e.target.value})}
             className="p-2 border border-green-300 rounded focus:outline-none focus:ring-2 focus:ring-green-400 text-black"
           />
         </div>

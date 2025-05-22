@@ -6,6 +6,7 @@ export async function POST(req) {
     const formData = await req.json()
     const classString = formData.class
     const amount = formData.amount
+    const user = formData.user
 
     const match = classString.match(/(\d+)年(\d+)班/);
     const grade = match[1];
@@ -15,6 +16,11 @@ export async function POST(req) {
     const [results] = await db.query(
       "UPDATE log SET amount = amount + ? WHERE grade = ? AND class = ?;", 
       [amount, grade, classNum])
+
+    const [results2] = await db.query(
+      "INSERT INTO user (user, grade, class, amount) VALUES (?, ?, ?, ?);",
+      [user, grade, classNum, amount]
+    )
 
     return NextResponse.json({message: "新增成功"})
 
